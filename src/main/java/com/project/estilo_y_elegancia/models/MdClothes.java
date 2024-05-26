@@ -1,8 +1,12 @@
 package com.project.estilo_y_elegancia.models;
 
+import com.project.estilo_y_elegancia.enums.EnCategory;
+import com.project.estilo_y_elegancia.enums.EnSize;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +29,9 @@ public class MdClothes extends MdBaseEntity {
  @Column(name = "image_url")
  private String image;
 
- @ManyToOne
- private MdCategory category;
- @ManyToOne
- private MdSize size;
+ @Enumerated(EnumType.STRING)
+ private EnSize size;
+
+ @Enumerated(EnumType.STRING)
+ private EnCategory category;
 }
