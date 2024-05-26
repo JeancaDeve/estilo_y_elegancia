@@ -31,9 +31,9 @@ public class BaseServiceImpl<T extends MdBaseEntity, ID extends Serializable> im
 
  @Override
  @Transactional
- public void deleteEntity(T entity) throws Exception {
+ public void deleteEntity(ID id) throws Exception {
   try {
-   _repository.delete(entity);
+   _repository.deleteById(id);
   } catch (Exception e) {
    throw e;
   }
@@ -41,9 +41,16 @@ public class BaseServiceImpl<T extends MdBaseEntity, ID extends Serializable> im
 
  @Override
  @Transactional
- public T updateEntity(T entity) throws Exception {
+ public T updateEntity(ID id, T entity) throws Exception {
   try {
-   return _repository.save(entity);
+   Optional<T> entityDb = _repository.findById(id);
+   if (entityDb.isPresent()) {
+    T entityUpdate = entityDb.get();
+    entityUpdate = _repository.save(entity);
+    return entityUpdate;
+   } else {
+    throw new Exception("No se encontro en la base de datos el regsitro con el id " + id);
+   }
   } catch (Exception e) {
    throw e;
   }
