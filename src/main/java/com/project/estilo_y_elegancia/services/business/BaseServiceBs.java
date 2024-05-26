@@ -5,11 +5,12 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface BaseServiceBs<T extends MdBaseEntity, ID extends Serializable> {
+
  public T saveEntity(T entity) throws Exception;
 
- public void deleteEntity(T entity)  throws Exception;
+ public void deleteEntity(ID id)  throws Exception;
 
- public T updateEntity(T entity)  throws Exception;
+ public T updateEntity(ID id,T entity)  throws Exception;
 
  public T findById(ID id)  throws Exception;
 
