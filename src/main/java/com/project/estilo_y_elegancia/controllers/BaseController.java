@@ -3,9 +3,9 @@ package com.project.estilo_y_elegancia.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.project.estilo_y_elegancia.models.MdBaseEntity;
@@ -26,7 +26,7 @@ public class BaseController<T extends MdBaseEntity, S extends BaseServiceImpl<T,
   return ResponseEntity.ok(service.saveEntity(entity));
  }
 
- @PatchMapping("/update/{id}")
+ @PutMapping("/update/{id}")
  public ResponseEntity<?> update(@PathVariable Long id, @RequestBody T entity) throws Exception {
   return ResponseEntity.ok(service.updateEntity(id, entity));
  }
