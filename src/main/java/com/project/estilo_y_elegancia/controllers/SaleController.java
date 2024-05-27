@@ -1,5 +1,6 @@
 package com.project.estilo_y_elegancia.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +15,12 @@ import com.project.estilo_y_elegancia.services.implementation.SaleServiceImpl;
 public class SaleController extends BaseController<MdSale, SaleServiceImpl> {
 
  @PostMapping("/generate")
- public ResponseEntity<MdSale> generateSale(@RequestBody MdSale sale) {
-  return ResponseEntity.ok(service.generateSale(sale));
+ public ResponseEntity<?> generateSale(@RequestBody MdSale sale) throws Exception {
+  try {
+   return ResponseEntity.ok(service.generateSale(sale));
+  } catch (Exception e) {
+   return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+  }
  }
 
 }
