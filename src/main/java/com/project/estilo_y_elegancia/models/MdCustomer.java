@@ -20,7 +20,7 @@ public class MdCustomer extends MdBaseEntity {
  private String name;
  @Column(name = "last_name")
  private String lastName;
- private String email;
- @Column(name = "phone_number")
+
+ @Column(name = "phone_number", length = 20, unique = true)
  private String phoneNumber;
 }
