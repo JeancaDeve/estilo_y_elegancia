@@ -1,7 +1,12 @@
 package com.project.estilo_y_elegancia.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +26,12 @@ public class MdSale extends MdBaseEntity {
  private int cant;
  private double total;
 
- @OneToMany
+ @ManyToMany
+ @JoinTable(name = "sale_clothes",   // Create a join table
+              joinColumns = @JoinColumn(name = "sale_id"),
+              inverseJoinColumns = @JoinColumn(name = "clothes_id"))
  private List<MdClothes> clothes;
+
+ @OneToOne(cascade = CascadeType.ALL)
+ private MdCustomer customer;
 }
