@@ -44,6 +44,7 @@ public class SaleServiceImpl extends BaseServiceImpl<MdSale, Long> implements Sa
 
     MdCustomer customerSale = CustomerExists(customer) ? _SaleRepository.CustomerExists(customer).get() : customer;
 
+    sale.setClothes(getClothesByIdForSale(listClothes));
     sale.setTotal(getTotalAmountSale(listClothes));
     sale.setCant(listClothes.size());
     sale.setCustomer(customerSale);
@@ -62,6 +63,17 @@ public class SaleServiceImpl extends BaseServiceImpl<MdSale, Long> implements Sa
     }
 
     return clothesList.stream().mapToDouble(MdClothes::getPrice).sum();
+  }
+
+  private List<MdClothes> getClothesByIdForSale(List<MdClothes> clothesList) {
+
+    List<MdClothes> getClothesList = new ArrayList<>();
+
+    for (MdClothes clothes : clothesList) {
+      getClothesList.add(_SaleRepository.getClothesById(clothes.getId()));
+    }
+
+    return getClothesList;
   }
 
   private void CustomerExistsByPhoneNumber(String phoneNumber) throws Exception {
