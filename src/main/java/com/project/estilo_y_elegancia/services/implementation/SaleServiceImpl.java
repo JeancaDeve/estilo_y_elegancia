@@ -48,6 +48,7 @@ public class SaleServiceImpl extends BaseServiceImpl<MdSale, Long> implements Sa
     sale.setTotal(getTotalAmountSale(listClothes));
     sale.setCant(listClothes.size());
     sale.setCustomer(customerSale);
+    reduceStock(sale.getClothes());
     return _SaleRepository.save(sale);
 
   }
@@ -82,6 +83,16 @@ public class SaleServiceImpl extends BaseServiceImpl<MdSale, Long> implements Sa
           " ya esta registrado, y no le pertenece.");
     }
 
+  }
+
+  private void reduceStock(List<MdClothes> clothesList) throws Exception {
+    for (MdClothes clothes : clothesList) {
+      if (clothes.getStock() > 0)
+        clothes.setStock(clothes.getStock() - 1);
+      else
+        throw new Exception(
+            "No hay stock suficiente de " + clothes.getDescription());
+    }
   }
 
 }
