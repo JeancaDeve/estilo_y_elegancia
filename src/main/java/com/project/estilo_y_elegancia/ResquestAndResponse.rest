@@ -1,0 +1,87 @@
+//Listado de toda la ropa registrada
+GET http://localhost:8080/api/clothes/get
+
+//Listar la ropa con el stock mayor o igual a 1
+
+GET http://localhost:8080/api/clothes/get/availables
+
+//Listar ventas registradas
+
+GET http://localhost:8080/api/sale/get
+
+
+//Buscar productos por description (ejm : ropa )
+
+GET http://localhost:8080/api/clothes/get/description/ropa
+
+//Buscar productos por categoria ( CAMISETAS, PANTALONES,VESTIDOS,ABRIGOS, ZAPATOS, ACCESORIOS)
+
+GET http://localhost:8080/api/clothes/get/category/ACCESORIOS
+
+//Buscar ventas por id  de cliente (ejm : 1)
+
+GET http://localhost:8080/api/sale/get/sales/customer/1
+
+//Guardar ropa
+
+POST http://localhost:8080/api/clothes/save
+content-type: application/json
+
+{
+    "price" : 233,
+    "stock" : 100,
+    "description" : "Hola mundo X200000",
+    "image" : "hola",
+    "category" : "CAMISETAS",
+    "size" : "XL"
+}
+
+//actualizar ropa (id = 1)
+
+PUT http://localhost:8080/api/clothes/update/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "description": "Reloj de Dina Boluarte",
+    "stock": 4,
+    "price": 200.0,
+    "image": "no hay",
+    "size": "XS",
+    "category": "ACCESORIOS"
+}
+
+//para realizar una venta 
+
+POST http://localhost:8080/api/sale/generate
+Content-Type: application/json
+
+{
+    "clothes": [
+        {
+            "id": 2
+        },
+        {
+            "id": 2
+        }
+    ],
+    "customer": {
+        "name": "Jeancarlo",
+        "lastName": "Fernandez",
+        "phoneNumber": "916214065"
+    }
+}
+
+// producto seleccionados (id de prodcuto
+
+POST http://localhost:8080/api/clothes/selected
+Content-Type: application/json
+
+[
+    {"id" : 1},
+    {"id" : 2},
+    {"id" : 1},
+    {"id" : 1}
+]
+
+
