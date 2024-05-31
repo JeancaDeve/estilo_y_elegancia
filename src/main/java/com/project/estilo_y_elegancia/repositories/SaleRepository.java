@@ -1,5 +1,6 @@
 package com.project.estilo_y_elegancia.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
@@ -20,5 +21,8 @@ public interface SaleRepository extends BaseRepository<Long, MdSale> {
 
  @Query("SELECT c FROM MdCustomer c WHERE c.phoneNumber = :phoneNumber")
  Optional<MdCustomer> getCustomerByPhoneNumber(String phoneNumber);
+
+ @Query("SELECT s FROM MdSale s WHERE s.customer.id = :idCustomer")
+ List<MdSale> findSaleByIdCustomer(Long idCustomer);
 
 }
