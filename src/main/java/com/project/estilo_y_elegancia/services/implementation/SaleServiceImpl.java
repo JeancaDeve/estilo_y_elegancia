@@ -95,4 +95,16 @@ public class SaleServiceImpl extends BaseServiceImpl<MdSale, Long> implements Sa
     }
   }
 
+  @Override
+  public List<MdSale> getSalesByIdCustomer(Long idCustomer) throws Exception {
+
+    List<MdSale> listSalesByCustomer = _SaleRepository.findSaleByIdCustomer(idCustomer);
+
+    if (listSalesByCustomer.isEmpty())
+      throw new Exception("No hay resultados");
+
+    return listSalesByCustomer;
+
+  }
+
 }
